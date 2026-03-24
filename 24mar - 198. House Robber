@@ -1,0 +1,14 @@
+class Solution:
+    def rob(self, nums: List[int]) -> int:
+        ans = 0
+        dp = dict()
+        def f(nums, indx):
+            if indx >= len(nums): return 0
+            if indx in dp : return dp[indx]
+
+            #skip
+            skip = f(nums,indx+1)
+            take = nums[indx] + f(nums,indx+2)
+            dp[indx] = max(skip,take)
+            return max(skip,take)
+        return f(nums,0)
